@@ -4,13 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 import initializeDatabase from "@/dbConfig/dbConfig";
 import {Post} from "@/utils/DBModel"; // Adjust the import path as needed
 
-type Params = { params: { id: string } };
+type Params = { params:  Promise<{ id: string }>  };
 
 // GET single post
 export async function GET(req: NextRequest, { params }: Params) {
   try {
     await initializeDatabase();
-    const post = await Post.findById(params.id);
+    const {id}= await params
+    const post = await Post.findById();
     
     if (!post) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
