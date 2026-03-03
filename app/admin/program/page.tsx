@@ -25,11 +25,7 @@ export default function AdminPrograms({ user }: { user: any }) {
   }
 
   return (
-    <AdminLayout user={{
-        name: user?.name || 'Admin',
-        email: user?.email || '',
-        role: user?.role || 'admin'
-    }}>
+    <AdminLayout >
       <div className="p-8">
         <div className="flex justify-between items-end mb-10">
           <div>
