@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { Profile } from '@/utils/InterfaceType';
+import { TabComponentProps } from '@/app/profile/page';
 
 export default function SkillsTab({ profile, u, remArr }
   :
-  {
-    profile: Profile,
-    u: (field: string, value: any) => void,
-    remArr: (field: string, index: number) => void,
-  }
+ TabComponentProps
 ) {
   const [newSkill, setNewSkill] = useState('');
 

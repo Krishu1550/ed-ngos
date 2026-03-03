@@ -11,6 +11,14 @@ import { Eye, Pencil, Check, Loader2 } from 'lucide-react';
 import { Profile } from '../../utils/InterfaceType';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
+
+export interface TabComponentProps {
+  profile: Profile;
+  u: <K extends keyof Profile>(field: K, value: Profile[K]) => void;
+  addArr: <K extends keyof Profile>(field: K, item: any) => void;
+  updArr: <K extends keyof Profile>(field: K, idx: number, changes: any) => void;
+  remArr: <K extends keyof Profile>(field: K, idx: number) => void;
+}
 const TABS = [
   { id: 'personal', label: '👤 Personal' },
   { id: 'education', label: '🎓 Education' },

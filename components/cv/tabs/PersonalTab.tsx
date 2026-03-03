@@ -1,10 +1,8 @@
+import { TabComponentProps } from "@/app/profile/page";
 import { Profile } from "@/utils/InterfaceType";
 
 export default function PersonalTab({ profile, u }:
-  {
-    profile: Profile,
-    u: (field: string, value: any) => void,
-  }
+ TabComponentProps
 ) {
   const input = "w-full bg-white/15 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-white/40 outline-none transition-all placeholder:text-white/20";
   const label = "block text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2";
