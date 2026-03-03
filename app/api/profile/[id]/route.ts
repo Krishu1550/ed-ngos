@@ -5,7 +5,7 @@ import initializeDatabase from "@/dbConfig/dbConfig";
 import {Profile} from "@/utils/DBModel";
 import mongoose from "mongoose";
 
-type Params = { params: { id: string } };
+type Params = { params: Promise<{ id: string }> };
 
 export async function GET(req: NextRequest, { params }: Params) {
   try {
@@ -33,9 +33,10 @@ export async function PUT(req: NextRequest, { params }: Params) {
   try {
     await initializeDatabase();
     const body = await req.json();
+    const {id}= await params
     
     // We update by ID for precision
-    const updated = await Profile.findByIdAndUpdate(params.id, body, { 
+    const updated = await Profile.findByIdAndUpdate(id, body, { 
       new: true, 
       runValidators: true 
     });
@@ -50,7 +51,8 @@ export async function PUT(req: NextRequest, { params }: Params) {
 export async function DELETE(req: NextRequest, { params }: Params) {
   try {
     await initializeDatabase();
-    const deleted = await Profile.findByIdAndDelete(params.id);
+    const {id}= await params
+    const deleted = await Profile.findByIdAndDelete(id);
     
     if (!deleted) return NextResponse.json({ error: "Profile not found" }, { status: 404 });
     return NextResponse.json({ message: "Profile deleted successfully" });

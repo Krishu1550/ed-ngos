@@ -28,8 +28,9 @@ export async function PUT(req: NextRequest, { params }: Params) {
   try {
     await initializeDatabase();
     const body = await req.json();
+    const {id}= await params
     
-    const updatedPost = await Post.findByIdAndUpdate(params.id, body, { 
+    const updatedPost = await Post.findByIdAndUpdate(params, body, { 
       new: true, 
       runValidators: true 
     });
@@ -45,7 +46,8 @@ export async function PUT(req: NextRequest, { params }: Params) {
 export async function DELETE(req: NextRequest, { params }: Params) {
   try {
     await initializeDatabase();
-    const deletedPost = await Post.findByIdAndDelete(params.id);
+    const {id}= await params
+    const deletedPost = await Post.findByIdAndDelete(id);
     
     if (!deletedPost) return NextResponse.json({ error: "Post not found" }, { status: 404 });
     return NextResponse.json({ message: "Post deleted successfully" });
